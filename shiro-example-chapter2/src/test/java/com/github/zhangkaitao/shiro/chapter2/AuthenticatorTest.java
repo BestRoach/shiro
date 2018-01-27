@@ -2,21 +2,15 @@ package com.github.zhangkaitao.shiro.chapter2;
 
 import junit.framework.Assert;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
-import org.apache.shiro.authz.ModularRealmAuthorizer;
 import org.apache.shiro.config.IniSecurityManagerFactory;
-import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.Destroyable;
 import org.apache.shiro.util.Factory;
 import org.apache.shiro.util.ThreadContext;
 import org.junit.After;
 import org.junit.Test;
-
 
 /**
  * <p>User: Zhang Kaitao
@@ -35,6 +29,8 @@ public class AuthenticatorTest {
         Assert.assertEquals(2, principalCollection.asList().size());
     }
 
+    // note expected表示出现该错误是才是正确状态
+    // note timeout用来指示时间上限
     @Test(expected = UnknownAccountException.class)
     public void testAllSuccessfulStrategyWithFail() {
         login("classpath:shiro-authenticator-all-fail.ini");
@@ -97,7 +93,7 @@ public class AuthenticatorTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         ThreadContext.unbindSubject();//退出时请解除绑定Subject到线程 否则对下次测试造成影响
     }
 
