@@ -20,6 +20,7 @@ public class MyRealm4 implements Realm {
 
     public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
+        System.out.println("========myRealm4========");
         String username = (String) token.getPrincipal();  //得到用户名
         String password = new String((char[]) token.getCredentials()); //得到密码
         if (!"zhang".equals(username)) {
@@ -29,6 +30,6 @@ public class MyRealm4 implements Realm {
             throw new IncorrectCredentialsException(); //如果密码错误
         }
         //如果身份认证验证成功，返回一个AuthenticationInfo实现；
-        return new SimpleAuthenticationInfo(username, password, getName());
+        return new SimpleAuthenticationInfo(username + "@myRealm4", password, getName());
     }
 }

@@ -37,7 +37,7 @@ public class OnlyOneAuthenticatorStrategy extends AbstractAuthenticationStrategy
                 info = singleRealmInfo;
             } else {
                 info = merge(singleRealmInfo, aggregateInfo);
-                if(info.getPrincipals().getRealmNames().size() > 1) {
+                if (info.getPrincipals().getRealmNames().size() > 1) {
                     System.out.println(info.getPrincipals().getRealmNames());
                     throw new AuthenticationException("Authentication token of type [" + token.getClass() + "] " +
                             "could not be authenticated by any configured realms.  Please ensure that only one realm can " +
@@ -45,7 +45,6 @@ public class OnlyOneAuthenticatorStrategy extends AbstractAuthenticationStrategy
                 }
             }
         }
-
 
         return info;
     }

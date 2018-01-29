@@ -12,6 +12,8 @@ import org.apache.shiro.util.ThreadContext;
 import org.junit.After;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * <p>User: Zhang Kaitao
  * <p>Date: 14-1-25
@@ -37,6 +39,8 @@ public class AuthenticatorTest {
         login("classpath:shiro-authenticator-all-fail.ini");
     }
 
+    // note 至少有一个Realm认证通过
+    // note org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy
     @Test
     public void testAtLeastOneSuccessfulStrategyWithSuccess() {
         login("classpath:shiro-authenticator-atLeastOne-success.ini");
@@ -44,10 +48,13 @@ public class AuthenticatorTest {
 
         //得到一个身份集合，其包含了Realm验证成功的身份信息
         PrincipalCollection principalCollection = subject.getPrincipals();
-        Assert.assertEquals(2, principalCollection.asList().size());
+        System.out.println(principalCollection);
+        // 断言,principalCollection中有两个信息
+        Assert.assertEquals(1, principalCollection.asList().size());
     }
 
     // note 只要有一个Realm验证成功即可,且只返回第一个Realm身份认证成功的认证信息
+    // note org.apache.shiro.authc.pam.FirstSuccessfulStrategy
     @Test
     public void testFirstOneSuccessfulStrategyWithSuccess() {
         login("classpath:shiro-authenticator-first-success.ini");
@@ -58,6 +65,8 @@ public class AuthenticatorTest {
         Assert.assertEquals(1, principalCollection.asList().size());
     }
 
+    // note 至少有两个Realm验证成功,返回所有的Realm身份信息,去重
+    // note com.github.zhangkaitao.shiro.chapter2.authenticator.strategy.AtLeastTwoAuthenticatorStrategy
     @Test
     public void testAtLeastTwoStrategyWithSuccess() {
         login("classpath:shiro-authenticator-atLeastTwo-success.ini");
@@ -65,9 +74,13 @@ public class AuthenticatorTest {
 
         //得到一个身份集合，因为myRealm1和myRealm4返回的身份一样所以输出时只返回一个
         PrincipalCollection principalCollection = subject.getPrincipals();
-        Assert.assertEquals(1, principalCollection.asList().size());
+        System.out.println("================");
+        System.out.println(principalCollection);
+        Assert.assertEquals(2, principalCollection.asList().size());
     }
 
+    // note 有且仅有一个可以认证通过
+    // note com.github.zhangkaitao.shiro.chapter2.authenticator.strategy.OnlyOneAuthenticatorStrategy
     @Test
     public void testOnlyOneStrategyWithSuccess() {
         login("classpath:shiro-authenticator-onlyone-success.ini");
@@ -75,6 +88,7 @@ public class AuthenticatorTest {
 
         //得到一个身份集合，因为myRealm1和myRealm4返回的身份一样所以输出时只返回一个
         PrincipalCollection principalCollection = subject.getPrincipals();
+        System.out.println(principalCollection);
         Assert.assertEquals(1, principalCollection.asList().size());
     }
 

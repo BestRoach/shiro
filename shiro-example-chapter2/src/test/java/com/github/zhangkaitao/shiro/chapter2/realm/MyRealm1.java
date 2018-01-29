@@ -20,6 +20,7 @@ public class MyRealm1 implements Realm {
     }
 
     public AuthenticationInfo getAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        System.out.println("========myRealm1========");
         // 得到用户名
         String username = (String) authenticationToken.getPrincipal();
         // 得到密码
@@ -33,6 +34,6 @@ public class MyRealm1 implements Realm {
             throw new IncorrectCredentialsException();
         }
         // 如果身份认证验证成功，返回一个AuthenticationInfo实现；
-        return new SimpleAuthenticationInfo(username, password, getName());
+        return new SimpleAuthenticationInfo(username + "@myRealm1", password, getName());
     }
 }
