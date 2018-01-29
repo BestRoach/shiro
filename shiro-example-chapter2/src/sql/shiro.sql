@@ -1,30 +1,39 @@
-drop database if exists shiro;
-create database shiro;
-use shiro;
+DROP DATABASE IF EXISTS shiro;
+CREATE DATABASE shiro;
+USE shiro;
 
-create table users (
-  id bigint auto_increment,
-  username varchar(100),
-  password varchar(100),
-  password_salt varchar(100),
-  constraint pk_users primary key(id)
-) charset=utf8 ENGINE=InnoDB;
-create unique index idx_users_username on users(username);
+CREATE TABLE users (
+  id            BIGINT AUTO_INCREMENT,
+  username      VARCHAR(100),
+  password      VARCHAR(100),
+  password_salt VARCHAR(100),
+  CONSTRAINT pk_users PRIMARY KEY (id)
+)
+  CHARSET = utf8
+  ENGINE = InnoDB;
+CREATE UNIQUE INDEX idx_users_username
+  ON users (username);
 
-create table user_roles(
-  id bigint auto_increment,
-  username varchar(100),
-  role_name varchar(100),
-  constraint pk_user_roles primary key(id)
-) charset=utf8 ENGINE=InnoDB;
-create unique index idx_user_roles on user_roles(username, role_name);
+CREATE TABLE user_roles (
+  id        BIGINT AUTO_INCREMENT,
+  username  VARCHAR(100),
+  role_name VARCHAR(100),
+  CONSTRAINT pk_user_roles PRIMARY KEY (id)
+)
+  CHARSET = utf8
+  ENGINE = InnoDB;
+CREATE UNIQUE INDEX idx_user_roles
+  ON user_roles (username, role_name);
 
-create table roles_permissions(
-  id bigint auto_increment,
-  role_name varchar(100),
-  permission varchar(100),
-  constraint pk_roles_permissions primary key(id)
-) charset=utf8 ENGINE=InnoDB;
-create unique index idx_roles_permissions on roles_permissions(role_name, permission);
+CREATE TABLE roles_permissions (
+  id         BIGINT AUTO_INCREMENT,
+  role_name  VARCHAR(100),
+  permission VARCHAR(100),
+  CONSTRAINT pk_roles_permissions PRIMARY KEY (id)
+)
+  CHARSET = utf8
+  ENGINE = InnoDB;
+CREATE UNIQUE INDEX idx_roles_permissions
+  ON roles_permissions (role_name, permission);
 
-insert into users(username,password)values('zhang','123');
+INSERT INTO users (username, password) VALUES ('zhang', '123');

@@ -19,6 +19,7 @@ import org.junit.Test;
  */
 public class AuthenticatorTest {
 
+    // note AuthenticationInfo 的职责是验证用户账号,是Shiro API中身份验证的核心入口点
     @Test
     public void testAllSuccessfulStrategyWithSuccess() {
         login("classpath:shiro-authenticator-all-success.ini");
@@ -46,6 +47,7 @@ public class AuthenticatorTest {
         Assert.assertEquals(2, principalCollection.asList().size());
     }
 
+    // note 只要有一个Realm验证成功即可,且只返回第一个Realm身份认证成功的认证信息
     @Test
     public void testFirstOneSuccessfulStrategyWithSuccess() {
         login("classpath:shiro-authenticator-first-success.ini");
@@ -78,8 +80,7 @@ public class AuthenticatorTest {
 
     private void login(String configFile) {
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<org.apache.shiro.mgt.SecurityManager> factory =
-                new IniSecurityManagerFactory(configFile);
+        Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory(configFile);
 
         //2、得到SecurityManager实例 并绑定给SecurityUtils
         org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
