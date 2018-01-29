@@ -11,6 +11,8 @@ import org.apache.shiro.authz.permission.WildcardPermission;
  */
 public class BitAndWildPermissionResolver implements PermissionResolver {
 
+    // note BitAndWildPermissionResolver 实现了 PermissionResolver 接口
+    // note 并根据权限字符串是否以 “+” 开头来解析权限字符串为 BitPermission 或 WildcardPermission
     public Permission resolvePermission(String permissionString) {
         if (permissionString.startsWith("+")) {
             return new BitPermission(permissionString);
