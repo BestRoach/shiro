@@ -1,22 +1,12 @@
 package com.github.zhangkaitao.shiro.chapter4;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import junit.framework.Assert;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
-import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
-import org.apache.shiro.authz.ModularRealmAuthorizer;
-import org.apache.shiro.authz.permission.WildcardPermissionResolver;
 import org.apache.shiro.config.IniSecurityManagerFactory;
-import org.apache.shiro.mgt.DefaultSecurityManager;
-import org.apache.shiro.realm.Realm;
-import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 import org.junit.Test;
-
-import java.util.Arrays;
 
 /**
  * <p>User: Zhang Kaitao
@@ -25,14 +15,20 @@ import java.util.Arrays;
  */
 public class ConfigurationCreateTest {
 
+    // note 从Shiro中获取对应的securityManager实例
     @Test
     public void test() {
 
+        // note IniSecurityFactory 是创建securityManager的工厂
+        // note 这里需要一个ini配置文件路径支持的格式有
+        // note "classpath:"(类路径),"file:"(文件系统),"url:"(网络)三种路径格式,默认是文件系统;
         Factory<org.apache.shiro.mgt.SecurityManager> factory =
                 new IniSecurityManagerFactory("classpath:shiro-config.ini");
 
+        // note 默认情况下先创建securityManager,自定义需要在ini文件中指定"securityManager = SecurityManager 实现类"
         org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
 
+        // note 获取SecurityManager实例
         //将SecurityManager设置到SecurityUtils 方便全局使用
         SecurityUtils.setSecurityManager(securityManager);
 
@@ -42,8 +38,6 @@ public class ConfigurationCreateTest {
         subject.login(token);
 
         Assert.assertTrue(subject.isAuthenticated());
-
-
 
     }
 }

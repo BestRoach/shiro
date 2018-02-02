@@ -1,6 +1,5 @@
 package com.github.zhangkaitao.shiro.chapter11;
 
-import com.github.zhangkaitao.shiro.chapter11.JdbcTemplateUtils;
 import com.github.zhangkaitao.shiro.chapter11.entity.Permission;
 import com.github.zhangkaitao.shiro.chapter11.entity.Role;
 import com.github.zhangkaitao.shiro.chapter11.entity.User;
@@ -36,12 +35,11 @@ public abstract class BaseTest {
 
     @Before
     public void setUp() {
-        JdbcTemplateUtils.jdbcTemplate().update("delete from sys_users");
-        JdbcTemplateUtils.jdbcTemplate().update("delete from sys_roles");
-        JdbcTemplateUtils.jdbcTemplate().update("delete from sys_permissions");
-        JdbcTemplateUtils.jdbcTemplate().update("delete from sys_users_roles");
-        JdbcTemplateUtils.jdbcTemplate().update("delete from sys_roles_permissions");
-
+        JdbcTemplateUtils.jdbcTemplate().update("DELETE FROM sys_users");
+        JdbcTemplateUtils.jdbcTemplate().update("DELETE FROM sys_roles");
+        JdbcTemplateUtils.jdbcTemplate().update("DELETE FROM sys_permissions");
+        JdbcTemplateUtils.jdbcTemplate().update("DELETE FROM sys_users_roles");
+        JdbcTemplateUtils.jdbcTemplate().update("DELETE FROM sys_roles_permissions");
 
         //1、新增权限
         p1 = new Permission("user:create", "用户模块新增", Boolean.TRUE);
