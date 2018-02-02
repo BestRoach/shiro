@@ -24,6 +24,7 @@ import org.apache.shiro.authz.Permission;
  * <p>Date: 14-1-26
  * <p>Version: 1.0
  */
+// note 定义BitAndWildPermissionResolver及BitPermission
 public class BitPermission implements Permission {
 
     private String resourceIdentify;

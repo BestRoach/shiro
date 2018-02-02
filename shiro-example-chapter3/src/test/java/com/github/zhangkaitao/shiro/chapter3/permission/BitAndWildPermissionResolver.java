@@ -9,6 +9,7 @@ import org.apache.shiro.authz.permission.WildcardPermission;
  * <p>Date: 14-1-26
  * <p>Version: 1.0
  */
+// note 定义BitAndWildPermissionResolver及BitPermission
 public class BitAndWildPermissionResolver implements PermissionResolver {
 
     // note BitAndWildPermissionResolver 实现了 PermissionResolver 接口

@@ -12,6 +12,7 @@ import java.util.Collection;
  * <p>Date: 14-1-26
  * <p>Version: 1.0
  */
+// note 定义MyRolePermissionResolver
 public class MyRolePermissionResolver implements RolePermissionResolver {
     // 用于根据角色字符串来解析的到权限集合
     public Collection<Permission> resolvePermissionsInRole(String roleString) {

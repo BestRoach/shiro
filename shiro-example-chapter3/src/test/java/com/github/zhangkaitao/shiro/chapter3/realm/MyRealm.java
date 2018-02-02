@@ -13,6 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
  * <p>Date: 14-1-26
  * <p>Version: 1.0
  */
+// note 自定义Realm
 public class MyRealm extends AuthorizingRealm {
 
     @Override
