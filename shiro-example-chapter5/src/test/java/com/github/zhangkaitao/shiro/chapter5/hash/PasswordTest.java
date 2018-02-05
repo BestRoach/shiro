@@ -1,14 +1,11 @@
 package com.github.zhangkaitao.shiro.chapter5.hash;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
-import org.apache.commons.beanutils.ConvertUtilsBean2;
 import org.apache.commons.beanutils.converters.AbstractConverter;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.codec.CodecSupport;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
-import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
 
 /**
@@ -58,12 +55,12 @@ public class PasswordTest extends BaseTest {
         login("classpath:shiro-jdbc-hashedCredentialsMatcher.ini", "liu", "123");
     }
 
-
     private class EnumConverter extends AbstractConverter {
         @Override
         protected String convertToString(final Object value) throws Throwable {
             return ((Enum) value).name();
         }
+
         @Override
         protected Object convertToType(final Class type, final Object value) throws Throwable {
             return Enum.valueOf(type, value.toString());
@@ -78,7 +75,7 @@ public class PasswordTest extends BaseTest {
 
     @Test(expected = ExcessiveAttemptsException.class)
     public void testRetryLimitHashedCredentialsMatcherWithMyRealm() {
-        for(int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             try {
                 login("classpath:shiro-retryLimitHashedCredentialsMatcher.ini", "liu", "234");
             } catch (Exception e) {/*ignore*/}

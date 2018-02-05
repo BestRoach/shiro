@@ -25,8 +25,6 @@ import java.security.spec.X509EncodedKeySpec;
  */
 public class CodecAndCryptoTest {
 
-
-
     @Test
     public void testBase64() {
         String str = "hello";
@@ -53,7 +51,6 @@ public class CodecAndCryptoTest {
         Assert.assertEquals(str, str2);
     }
 
-
     @Test
     public void testRandom() {
         //生成随机数
@@ -62,15 +59,12 @@ public class CodecAndCryptoTest {
         System.out.println(randomNumberGenerator.nextBytes().toHex());
     }
 
-
-
     @Test
     public void testMd5() {
         String str = "hello";
         String salt = "123";
         String md5 = new Md5Hash(str, salt).toString();//还可以转换为 toBase64()/toHex()
         System.out.println(md5);
-
 
     }
 
@@ -84,7 +78,7 @@ public class CodecAndCryptoTest {
     }
 
     @Test
-       public void testSha256() {
+    public void testSha256() {
         String str = "hello";
         String salt = "123";
         String sha1 = new Sha256Hash(str, salt).toString();
@@ -120,8 +114,6 @@ public class CodecAndCryptoTest {
 
     }
 
-
-
     @Test
     public void testHashService() {
         DefaultHashService hashService = new DefaultHashService(); //默认算法SHA-512
@@ -137,7 +129,6 @@ public class CodecAndCryptoTest {
         String hex = hashService.computeHash(request).toHex();
         System.out.println(hex);
     }
-
 
     @Test
     public void testAesCipherService() {
@@ -178,7 +169,6 @@ public class CodecAndCryptoTest {
     @Test
     public void testDefaultBlockCipherService() throws Exception {
 
-
         //对称加密，使用Java的JCA（javax.crypto.Cipher）加密API，常见的如 'AES', 'Blowfish'
         DefaultBlockCipherService cipherService = new DefaultBlockCipherService("AES");
         cipherService.setKeySize(128);
@@ -196,8 +186,6 @@ public class CodecAndCryptoTest {
         Assert.assertEquals(text, text2);
     }
 
-
     //加密/解密相关知识可参考snowolf的博客 http://snowolf.iteye.com/category/68576
-
 
 }

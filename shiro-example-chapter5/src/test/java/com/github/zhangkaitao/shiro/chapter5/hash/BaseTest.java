@@ -15,14 +15,12 @@ import org.junit.After;
  */
 public abstract class BaseTest {
 
-
-
     @After
     public void tearDown() throws Exception {
         ThreadContext.unbindSubject();//退出时请解除绑定Subject到线程 否则对下次测试造成影响
     }
 
-    protected void login(String configFile, String username, String password) {
+    void login(String configFile, String username, String password) {
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
         Factory<org.apache.shiro.mgt.SecurityManager> factory =
                 new IniSecurityManagerFactory(configFile);
